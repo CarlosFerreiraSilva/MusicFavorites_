@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Webscrapping_Video.props" />
+</Project>

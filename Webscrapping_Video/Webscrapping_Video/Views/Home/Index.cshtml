@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+        #videoContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+            #videoContainer iframe {
+                max-width: 90%;
+                max-height: 90%;
+            }
+
+        #btnShowVideo {
+            font-size: 24px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: lightsteelblue;">
+
+    <br />
+
+   
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Pesquisar..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button id="btnSearch" onclick="searchVideo()" class="btn btn-secondary" type="button">Button</button>
+            </div>
+        </div>
+
+
+        <button id="btnShowVideo" style="margin-bottom: 5px;" type="button" class="btn btn-secondary btn-lg" onclick="showVideo('https://www.youtube.com/embed/FyKPsua6Br8')">FIFTY FIFTY - Cupid</button>
+        <button id="btnShowVideo" style="margin-bottom: 5px;" type="button" class="btn btn-secondary btn-lg" onclick="showVideo('https://www.youtube.com/embed/lPocGvspDTk')">Lofi music playlist 💖</button>
+        <button id="btnShowVideo" style="margin-bottom: 5px;" type="button" class="btn btn-secondary btn-lg" onclick="showVideo('https://www.youtube.com/embed/IrK3BNlHXic')">ＣＨＩＬＬ　＆　ＤＲＩＶＥ</button>
+
+        <br />
+
+
+
+        <div id="videoContainer">
+            <iframe id="videoPlayer" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div style="width:100px; height:50px;"></div>
+                 <button id="btnClose" class="btn btn-outline-danger" onclick="closeVideo()" style="margin-right: 10px;">Sair</button>
+            <button id="btnRestart" class="btn btn-outline-primary" onclick="restartVideo()" style="margin-left: 10px;">Reiniciar Video</button>
+        </div>
+   
+
+    <script>
+        var videoPlayer = document.getElementById('videoPlayer');
+
+        // Função para mostrar o vídeo
+        function showVideo(videoSrc) {
+            var videoContainer = document.getElementById('videoContainer');
+
+            videoPlayer.src = videoSrc;
+            videoContainer.style.display = 'flex';
+        }
+
+        // Função para reiniciar o vídeo
+        function restartVideo() {
+            var videoSrc = videoPlayer.src;
+            videoPlayer.src = '';
+            videoPlayer.src = videoSrc;
+        }
+
+        // Função para fechar o vídeo
+        function closeVideo() {
+            var videoContainer = document.getElementById('videoContainer');
+
+            videoPlayer.src = '';
+            videoContainer.style.display = 'none';
+        }
+
+        // Função para pesquisar o vídeo
+        function searchVideo() {
+            var searchInput = document.getElementById('searchInput').value;
+            var buttons = document.querySelectorAll('#btnShowVideo');
+
+            for (var i = 0; i < buttons.length; i++) {
+                var buttonText = buttons[i].innerText;
+                if (buttonText.includes(searchInput)) {
+                    buttons[i].style.display = 'inline';
+                } else {
+                    buttons[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
